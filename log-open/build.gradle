@@ -1,0 +1,69 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+	id 'java-library'
+    id 'maven-publish'
+}
+
+apply plugin: 'eclipse'
+group = 'com.yyn'
+version = rootProject.file("version").text.trim()
+sourceCompatibility = '1.8'
+eclipse {
+   classpath {
+        file {
+            whenMerged {
+                def jre = entries.find { it.path.contains 'org.eclipse.jdt.launching.JRE_CONTAINER' }
+                jre.path = 'org.eclipse.jdt.launching.JRE_CONTAINER'
+            }
+        }
+   }
+}
+// 构建信息
+springBoot {
+	buildInfo()
+}
+dependencyManagement{
+  resolutionStrategy{
+   
+    // cache dynamic versions for 10 minutes
+    //cacheDynamicVersionsFor 10*60, 'seconds'
+    // don't cache changing modules at all
+    cacheChangingModulesFor 0, 'seconds'
+  }
+}
+task sourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	
+}
+jar {
+	enabled = true
+}
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.springframework.boot:spring-boot-starter-json'
+ 
+	implementation 'org.apache.httpcomponents:httpclient:4.5.3'
+	
+	implementation 'org.apache.commons:commons-lang3:3.8.1'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}

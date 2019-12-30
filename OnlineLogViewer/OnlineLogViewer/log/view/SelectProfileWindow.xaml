@@ -1,0 +1,18 @@
+﻿<Window x:Class="OnlineLogViewer.log.view.SelectProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnlineLogViewer.log.view"
+        mc:Ignorable="d"
+        Title="SelectProfileWindow" Height="100" Width="300">
+    <DockPanel>
+        <Label Content="配置" VerticalAlignment="Center"/>
+        <ComboBox x:Name="SelectProfileComboBox" Width="120" SelectionChanged="SelectProfileComboBox_SelectionChanged" SelectedIndex="0" VerticalAlignment="Center">
+            <ComboBoxItem Content="dev" HorizontalAlignment="Left" Width="118" />
+            <ComboBoxItem Content="test" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="production" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+        <Button Content="确定"  Margin="5,0,0,0" Click="Button_Click_Confirm" VerticalAlignment="Center"/>
+    </DockPanel>
+</Window>

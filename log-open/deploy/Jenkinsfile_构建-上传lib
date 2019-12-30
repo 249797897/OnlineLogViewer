@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    environment { 
+        YYN_ARTIFACT_VERSION = readFile('version')
+    }
+    
+    stages {
+    	stage('pre') {
+            steps {
+            	dir('./build/libs'){
+            		deleteDir()
+            	}                
+            }
+        }
+        stage('Build and upload') {
+            steps {
+                sh './gradlew publish'
+            }
+        }
+        
+    }     
+}

@@ -1,0 +1,96 @@
+﻿<Window x:Class="OnlineLogViewer.log.view.ConfigLoggerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnlineLogViewer.log.view"
+        mc:Ignorable="d"
+        Title="ConfigLogger" Closed="Window_Closed" Width="999">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <Label Content="服务"/>
+            <ComboBox x:Name="AllServiceComboBox" Width="120"/>
+
+            <TextBox x:Name="FilterLoggerNameTextBox" TextWrapping="Wrap" Text="" Width="300"/>
+            <Button x:Name="FilterLoggerButton" Content="过滤" Width="40" d:LayoutOverrides="Height" Click="FilterLoggerButton_Click"/>
+            <Button Content="重置所有日志设置" Click="Button_Click_RESET_ALL" Margin="5,0,0,0" />
+            <Button Content="探测" Click="Button_Click_PROBE" Margin="5,0,0,0" />
+        </StackPanel>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ListView x:Name="allLoggerListView" SelectionChanged="AllLoggerListView_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="100" Header="服务"
+         DisplayMemberBinding="{Binding contextName}"  />
+                        <GridViewColumn Width="500" Header="日志类"  
+         DisplayMemberBinding="{Binding loggerName}" />
+                        <GridViewColumn Width="80" Header="当前级别"
+         DisplayMemberBinding="{Binding loggerLevel}" />
+                        <GridViewColumn Width="80" Header="设置级别" >
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate >
+                                    <ComboBox Width="60" Text="{Binding setLoggerLevel}">
+                                        <ComboBoxItem Content="ERROR"/>
+                                        <ComboBoxItem Content="WARN"/>
+                                        <ComboBoxItem Content="INFO"/>
+                                        <ComboBoxItem Content="DEBUG"/>
+                                        <ComboBoxItem Content="TRACE"/>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="160" Header="操作">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Button x:Name="setLoggerButton" Content="设置"  Width="40" Click="SetLoggerButton_Click"/>
+                                        <Button x:Name="ResetLoggerButton" Content="重置"  Width="40" Click="ResetLoggerButton_Click"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="modifiedLoggerListView" SelectionChanged="AllLoggerListView_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" Grid.Row="1" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="100" Header="服务"
+         DisplayMemberBinding="{Binding contextName}"  />
+                        <GridViewColumn Width="500" Header="日志类"  
+         DisplayMemberBinding="{Binding loggerName}" />
+                        <GridViewColumn Width="80" Header="当前级别"
+         DisplayMemberBinding="{Binding loggerLevel}" />
+                        <GridViewColumn Width="80" Header="设置级别" DisplayMemberBinding="{Binding setLoggerLevel}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox Width="60" Text="{Binding setLoggerLevel}">
+                                        <ComboBoxItem Content="ERROR"/>
+                                        <ComboBoxItem Content="WARN"/>
+                                        <ComboBoxItem Content="INFO"/>
+                                        <ComboBoxItem Content="DEBUG"/>
+                                        <ComboBoxItem Content="TRACE"/>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="160" Header="操作">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Button x:Name="setLoggerButton" Content="设置"  Width="40" Click="SetLoggerButton_Click"/>
+                                        <Button x:Name="ResetLoggerButton" Content="重置"  Width="40" Click="ResetLoggerButton_Click"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </DockPanel>
+</Window>
