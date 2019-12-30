@@ -23,4 +23,4 @@ OnlineLogViewer是C#项目，为日志查看的客户端，需要修改LogMessag
 
 如果查找出来的日志类较多，可以进一步在本地过滤，在输入框输入文本，点击过滤即可
 
-![image](https://github.com/249797897/OnlineLogViewer/readme/20191230151158.jpg)
+![image](https://github.com/249797897/OnlineLogViewer/blob/master/readme/20191230151158.jpg)
